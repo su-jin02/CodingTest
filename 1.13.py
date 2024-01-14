@@ -23,7 +23,6 @@ def union(a, b):  # 두 원소가 속한 집합을 합치기
 
 for _ in range(y):
     i, j, k = map(int, input().split())
-
     if i == 0:
         union(j,k)
     else:
