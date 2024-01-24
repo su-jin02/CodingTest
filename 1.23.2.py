@@ -1,15 +1,13 @@
-# 강의섹션7. 미로탐색(BFS)
+# 강의섹션7. 미로탐색(DFS)
 import sys
-from collections import deque
 input = sys.stdin.readline
 ch= [list(map(int, input().split())) for _ in range(7)]
 visited = [[0] * 7 for _ in range(7)]
 
-q = deque()
-q.append([0,0, 0])
 visited[0][0] = 1
 dx=[-1,1,0,0]
 dy=[0,0,1,-1]
+res = 0
 
 def canMove(x, y):
     if x < 0 or x > 6:
@@ -18,17 +16,20 @@ def canMove(x, y):
         return False
     return True
 
-while q:
-    x,y, dist = q.popleft()
+def DFS(x,y):
+    global res
     if x == 6 and y == 6:
-        print(dist)
-        break
-    for i in range(4):
-        tx = x+dx[i]
-        ty = y+dy[i]
-        if canMove(tx,ty) and visited[tx][ty] == 0 and ch[tx][ty]==0:
-            q.append([tx,ty, dist + 1])
-            visited[tx][ty] = 1
+        res += 1
+    else:
+        for i in range(4):
+            tx = x + dx[i]
+            ty = y + dy[i]
+            if canMove(tx,ty) and visited[tx][ty] == 0 and ch[tx][ty] == 0:
+                visited[tx][ty] = 1
+                DFS(tx,ty)
+                visited[tx][ty] = 0
 
-else:
-    print(-1)
+
+DFS(0,0)
+print(res)
+
