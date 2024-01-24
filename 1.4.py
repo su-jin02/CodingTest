@@ -31,10 +31,8 @@ for i in range(b):
 
 print(result)
 
-#한줄평 : dfs문제로 풀고 싶어 도전하였으나 거의 그냥 for문과 다를바가 없이 구현해버렸고 런타임 에러를 마주하고 알고리즘을 사용하지 않고 풀었다..
-#좀 더 실력을 키워서 dfs방식으로 다시 풀어봐야겠다.
+#한줄평 : dfs문제로 풀고 싶었으나 그냥 for문만 이용해서 품.
 #더 나은 코드
-
 import sys
 a,b = map(int,sys.stdin.readline().split())
 lst = list(list(sys.stdin.readline().strip()) for _ in range(a))
