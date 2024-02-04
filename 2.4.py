@@ -1,4 +1,4 @@
-# 강의섹션8. 가방문제
+# 강의섹션8. 동전교환
 import sys
 input = sys.stdin.readline
 n=int(input())
