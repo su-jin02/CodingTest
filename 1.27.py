@@ -1,32 +1,46 @@
-# 강의섹션7. 안전영역
+# 강의섹션7. 안전영역(BFS)
 import sys
-dx = [-1, 0, 1, 0]
-dy = [0, 1, 0, -1]
-sys.setrecursionlimit(10 ** 6)
-
-
-def DFS(x, y, h):
-    ch[x][y] = 1
-    for i in range(4):
-        xx = x + dx[i]
-        yy = y + dy[i]
-        if 0 <= xx < n and 0 <= yy < n and ch[xx][yy] == 0 and board[xx][yy] > h:
-            DFS(xx, yy, h)
-
-
+from collections import deque
+input = sys.stdin.readline
 n = int(input())
-cnt = 0
+board=[]
+maxx = 0
+for _ in range(n):
+    a = list(map(int, input().split()))
+    if max(a) > maxx:
+        maxx = max(a)
+    board.append(a)
+
+q = deque()
+dx=[-1, 0, 0, 1]
+dy=[0, 1, -1, 0]
 res = 0
-board = [list(map(int, input().split())) for _ in range(n)]
-for h in range(100):
-    ch = [[0] * n for _ in range(n)]
+
+def canMove(x, y):
+    if x < 0 or x > n-1:
+        return False
+    if y < 0 or y > n-1:
+        return False
+    return True
+
+for h in range(maxx):
     cnt = 0
-    for i in range(n):
-        for j in range(n):
-            if ch[i][j] == 0 and board[i][j] > h:
+    visited = [[0] * n for _ in range(n)]
+    for j in range(n):
+        for k in range(n):
+            if board[j][k] > h and visited[j][k] == 0:
+                q.append([j,k])
+                visited[j][k] = 1
+                while q:
+                    x, y = q.popleft()
+                    for i in range(4):
+                        tx = x + dx[i]
+                        ty = y + dy[i]
+                        if canMove(tx, ty) and board[tx][ty] > h and visited[tx][ty] == 0:
+                            visited[tx][ty] = 1
+                            q.append([tx, ty])
                 cnt += 1
-                DFS(i, j, h)
-    res = max(res, cnt)
-    if cnt == 0:
-        break
+    if cnt > res:
+        res = cnt
+
 print(res)
