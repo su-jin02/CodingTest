@@ -1,4 +1,4 @@
-# 백준7569(dfs)
+# 백준7569 토마토(DFS)
 import sys
 from collections import deque
 input = sys.stdin.readline
