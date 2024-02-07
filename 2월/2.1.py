@@ -1,17 +1,22 @@
-# 강의섹션8. 최대 선 연결하기
+# 강의섹션8. 알리바바와 40인의 도둑(Top-Down)
 import sys
 input = sys.stdin.readline
-a = int(input())
-ch = list(map(int, input().split()))
-dy = [0] * a
-dy[0] = 1
-res = 0
-for i in range(1, a):
-    for j in range(0, i):
-        if ch[i] > ch[j] and dy[i] < dy[j]:
-            dy[i] = dy[j]
-    dy[i] += 1
-    if res < dy[i]:
-        res = dy[i]
+a =int(input())
+board = [list(map(int, input().split())) for _ in range(a)]
+dp = [[0] * a for _ in range(a)]
 
-print(res)
+def DFS(x,y):
+    if dp[x][y] > 0:
+        return dp[x][y]
+    if x==0 and y==0:
+        return board[0][0]
+    else:
+        if x == 0:
+            dp[x][y] = DFS(x,y-1) + board[x][y]
+        elif y == 0:
+            dp[x][y] = DFS(x-1,y) + board[x][y]
+        else:
+            dp[x][y] = min(DFS(x,y-1),DFS(x-1,y)) + board[x][y]
+        return dp[x][y]
+
+print(DFS(a-1,a-1))
