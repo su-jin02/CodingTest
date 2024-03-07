@@ -1,20 +1,21 @@
 # 강의섹션4. 침몰하는 타이타닉
 import sys
 from collections import deque
-n, limit=map(int, input().split())
-p=list(map(int, input().split()))
-p.sort()
-p=deque(p)
-cnt=0
-while p:
-    if len(p)==1:
-        cnt+=1
+input = sys.stdin.readline
+n,m = map(int, input().split())
+weight = list(map(int, input().split()))
+weight.sort(reverse=True)
+weight = deque(weight)
+boat = 0
+
+while weight:
+    if len(weight) == 1:
+        boat += 1
         break
-    if p[0]+p[-1]>limit:
-        p.pop()
-        cnt+=1
-    else:
-        p.popleft()
-        p.pop()
-        cnt+=1
-print(cnt)
+    cnt = weight.popleft()
+    if cnt + weight[-1] <= m:
+        weight.pop()
+    boat += 1
+
+print(boat)
+
