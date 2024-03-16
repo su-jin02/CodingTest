@@ -1,24 +1,29 @@
 import sys
-sys.setrecursionlimit(10**6)
-input = sys.stdin.readline
-n=int(input())
-res = [0]*(n+1)
-graph = {}
-for j in range(1,n+1):
-    graph[j] = []
+from collections import deque
 
-for _ in range(n-1):
-    a,b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+def func():
+    input = sys.stdin.readline
 
-def search(i):
-    for j in graph[i]:
-        if res[j] == 0:
-            res[j] = i
-            search(j)
+    num_node = int(input())
+    graph = [[] for _ in range(num_node+1)]
+    for _ in range(num_node-1):
+        v1, v2 = map(int, input().split())
+        graph[v1].append(v2)
+        graph[v2].append(v1)
 
-res[1] = 1
-search(1)
-for i in range(2,n+1):
-    print(res[i])
+    tree = [0]*(num_node+1)
+    queue = deque([1])
+    tree[1] = 1
+
+    while queue:
+        v = queue.popleft()
+
+        for nv in graph[v]:
+            if not tree[nv]:
+                tree[nv] = v
+                queue.append(nv)
+
+    for i in range(2, num_node+1):
+        sys.stdout.write(f'{tree[i]}\n')
+    return
+func()
