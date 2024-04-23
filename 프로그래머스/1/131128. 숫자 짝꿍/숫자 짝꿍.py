@@ -1,8 +1,7 @@
 from collections import Counter
 
-
 def solution(X, Y):
-    # 각 숫자 등장 횟수 카운트
+    answer = ''
     x_cnt = Counter(map(int, X))
     y_cnt = Counter(map(int, Y))
     common_keys = sorted(set(x_cnt.keys()) & set(y_cnt.keys()), reverse=True)
@@ -13,6 +12,7 @@ def solution(X, Y):
         return str(common_keys[-1])
     answer = "".join(str(key) * min(x_cnt[key], y_cnt[key]) for key in common_keys)
     return answer
+
 
 # def solution(x,y):
 #     y = list(y)
