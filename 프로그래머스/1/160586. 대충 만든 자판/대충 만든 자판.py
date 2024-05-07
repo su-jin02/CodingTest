@@ -1,17 +1,16 @@
 def solution(keymap, targets):
     answer = []
-    for i in range(len(targets)):
+    for target in targets:
         res = 0
-        for target in targets[i]:
+        for x in target:
             count = 101
             for key in keymap:
-                if target in key:
-                    count = min(key.index(target)+1, count)
+                if x in key:
+                    count = min(key.index(x)+1, count)
             if count == 101:
                 res = -1
                 break
             else:
                 res += count
-        answer.append(res)
-                    
+        answer.append(res)              
     return answer
