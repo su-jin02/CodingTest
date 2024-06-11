@@ -1,19 +1,16 @@
-#풀이 참조
 def solution(name):
     len_name = len(name)
     answer = 0
-    rem = 0
-    cnt = 1e9
+    move = len_name - 1
     for i in range(len_name):
         if (name[i] != 'A'):
             cal = ord(name[i])
             answer += min(91-cal, cal-65)
 
-            if i == 0:
-                continue
-            tmp = rem + len_name - i
-            cnt = min(cnt, min(tmp+rem, tmp+len_name-i))
-            # 우측이동 후 좌측으로 이동, 좌측이동 후 우측 이동인지
-            rem = i
-    cnt = min(rem, cnt) #다 훑기 vs 특정 숫자만
-    return answer + cnt
+        j = i + 1
+        while j < len_name and name[j] == 'A':
+            j += 1
+        # 우측이동 후 좌측으로 이동, 좌측이동 후 우측 이동인지
+        move = min(move, i + i + len_name - j, (len_name - j) * 2 + i)
+        
+    return answer + move
