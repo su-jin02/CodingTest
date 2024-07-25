@@ -1,10 +1,9 @@
 def solution(num_list):
-    x = 0
-    y = 1
+    x=1
+    y=pow(sum(num_list),2)
     for i in num_list:
-        x += i
-        y *= i
-    if y > pow(x,2):
-        return 0
-    else:
+        x *= i
+    if x < y:
         return 1
+    else:
+        return 0
