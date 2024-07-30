@@ -3,9 +3,10 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 a = int(input())
-ch= [list(map(int, input().split())) for _ in range(a)]
+island = [list(map(int, input().split())) for _ in range(a)]
 res = 0
 q = deque()
+
 dx=[-1, -1, 0, 1, 1, 1, 0, -1]
 dy=[0, 1, 1, 1, 0, -1, -1, -1]
 
@@ -22,15 +23,16 @@ def BFS():
         for i in range(8):
             tx = x+dx[i]
             ty = y+dy[i]
-            if canMove(tx,ty) and ch[tx][ty] == 1:
-                ch[tx][ty] = 0
+            if canMove(tx,ty) and island[tx][ty] == 1:
+                island[tx][ty] = 0
                 q.append([tx,ty])
 
 for i in range(a):
     for j in range(a):
-        if(ch[i][j] == 1):
+        if(island[i][j] == 1):
             q.append([i,j])
-            ch[i][j] = 0
+            island[i][j] = 0
             BFS()
             res += 1
+
 print(res)
