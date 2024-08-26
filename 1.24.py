@@ -6,7 +6,6 @@ a = int(input())
 island = [list(map(int, input().split())) for _ in range(a)]
 res = 0
 q = deque()
-
 dx=[-1, -1, 0, 1, 1, 1, 0, -1]
 dy=[0, 1, 1, 1, 0, -1, -1, -1]
 
@@ -34,5 +33,4 @@ for i in range(a):
             island[i][j] = 0
             BFS()
             res += 1
-
 print(res)
