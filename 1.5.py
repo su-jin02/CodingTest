@@ -4,17 +4,17 @@ x,y = map(int, sys.stdin.readline().split())
 result = 0
 
 def DFS(a):
-    global c, result
+    global d, result
     if(a == y):
-        for i in c:
+        for i in d:
             print(i, end=' ')
         print()
         result += 1
     else:
         for i in range(x):
-            c[a] = i+1
+            d[a] = i+1
             DFS(a+1)
 
-c = [0]*y
+d = [0]*y
 DFS(0)
 print(result)
