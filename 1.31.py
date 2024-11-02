@@ -1,5 +1,5 @@
 # 강의섹션8. 최대 부분 증가수열
-#수정22
+#수정23
 import sys
 input = sys.stdin.readline
 a = int(input())
