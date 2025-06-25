@@ -1,9 +1,9 @@
+from collections import deque
 def solution(arr):
-    answer = []
+    q = deque()
     for i in arr:
-        if answer:
-            if i != answer[-1]:
-                answer.append(i)
+        if q and q[-1] == i:
+            continue
         else:
-            answer.append(i)
-    return answer
+            q.append(i)
+    return list(q)
