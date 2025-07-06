@@ -5,7 +5,6 @@ def solution(begin, target, words):
     answer = len(words)
 
     def dfs(word, find):
-        print(word, find)
         nonlocal answer, words
         for i in range(len(words)):
             if find[i] == 0:
@@ -19,7 +18,6 @@ def solution(begin, target, words):
                 #맞다면 탐색
                 if diff == 1:
                     if words[i] == target:
-                        print('-----',word, words[i], find)
                         temp = 0
                         for i in find:
                             if i == 1:
